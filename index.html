@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>FWS</title>
+		<script src="index.js"></script>
+        <link rel="stylesheet" href="style.css">
+		<script>
+            let pk = 0;
+           window.myState = {};
+            const set = (state) => {
+                window.myState  = {...window.myState, ...state};
+            };
+			function logging() {
+                const formData = new FormData(document.getElementById('form'))
+                let fobj = {};
+                for (const field of formData.entries()) {
+                    fobj = {...fobj, [field[0]]: field[1]}
+                }
+                fwsDdbStore(window.myState, set, ["post", {pk, ...fobj}]);
+                const li=document.createElement('li');
+                li.innerHTML=li.innerHTML + JSON.stringify({pk, ...fobj});
+                document.getElementById("post-list").appendChild(li)
+                pk++
+                document.getElementById("pk").value = pk;
+			}
+		</script>
+	</head>
+	<body>
+        <div id="disabled">
+        <label>Table</label>
+        <input name="post" disabled placeholder="Post Table" value="post"/>
+        <label>ID</label>
+        <input name="pk" id="pk" disabled placeholder="Primary Key" value="0" />
+    </div>
+
+		<form onsubmit="return false" id="form">
+            <label>Title</label>
+            <input name="title" placeholder="Title"/>
+            <label>Author</label>
+            <input name="author" placeholder="Author"/>
+			<input type="submit" value="Submit" onclick="logging()"></button>
+		</form>
+
+        <ul id="post-list">
+        </ul>
+	</body>
+</html>
