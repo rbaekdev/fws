@@ -1,0 +1,14 @@
+{
+	"name": "fws",
+	"version": "0.1.0",
+	"description": "Fake AWS Services",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "rbaekdev",
+	"license": "ISC",
+	"dependencies": {
+		"immutability-helper": "^3.1.1"
+	}
+}
