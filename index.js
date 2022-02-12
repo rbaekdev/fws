@@ -1,27 +1,27 @@
 const update = require("immutability-helper");
 
-const fwsDdbStore = (state, setState, data) => {
-	/* 
-    Info
-    -----
-    data is formatted like:
-        [key[tableName], object[entryData]]
-    ex: 
-        [
-        "posts", 
-            {pk: 0, title: "Hello World", author: "Richard", body: "Hi there!"},
-            {pk: 1, title: "Goodbye", author:"Richard", body: "Have a good day!"}
-        ]
-    -----
-        state is formatted like:
-            {key[tablename]: {
-                PK: {...keys}
-                }
+/* 
+Info
+-----
+data is formatted like:
+    [key[tableName], object[entryData]]
+ex: 
+    [
+    "posts", 
+        {pk: 0, title: "Hello World", author: "Richard", body: "Hi there!"},
+        {pk: 1, title: "Goodbye", author:"Richard", body: "Have a good day!"}
+    ]
+-----
+    state is formatted like:
+        {key[tablename]: {
+            PK: {...keys}
             }
-    -----
-    */
+        }
+-----
+*/
 
-	let db = state ? state : {};
+const fwsDdbStore = (state, setState, data) => {
+	let db = state || {};
 	if (data[0]) {
 		const obj = Object.assign(
 			{},
